@@ -1,0 +1,39 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "gangadf"
+		},
+		"AzureDataLakeStorage_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage_properties_typeProperties_url": {
+			"value": "https://gangasa.dfs.core.windows.net/"
+		},
+		"HttpServer1_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/kdw11042000/Ganga/main/customer.csv"
+		},
+		"HttpServer2_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/kdw11042000/Ganga/main/lineitem.csv"
+		},
+		"HttpServer3_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/kdw11042000/Ganga/main/nation.csv"
+		},
+		"HttpServer4_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/kdw11042000/Ganga/main/orders.csv"
+		},
+		"HttpServer5_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/kdw11042000/Ganga/main/part.csv"
+		},
+		"HttpServer6_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/kdw11042000/Ganga/main/partsupp.csv"
+		},
+		"HttpServer7_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/kdw11042000/Ganga/main/region.csv"
+		},
+		"HttpServer8_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/kdw11042000/Ganga/main/supplier.csv"
+		}
+	}
+}
