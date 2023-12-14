@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage'"
 		},
+		"AzureDatabricks1_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks1'"
+		},
 		"AzureDataLakeStorage_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://gangasa.dfs.core.windows.net/"
@@ -578,6 +582,33 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "nb1-cleaning",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "supplier",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/byalla-sreekanth_1701233001482@npgreatlearning.onmicrosoft.com/nb1-dataCleaning"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabricks1",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"policy": {
@@ -601,7 +632,8 @@
 				"[concat(variables('factoryId'), '/datasets/regioninput')]",
 				"[concat(variables('factoryId'), '/datasets/regionoutput')]",
 				"[concat(variables('factoryId'), '/datasets/supplierinput')]",
-				"[concat(variables('factoryId'), '/datasets/supplieroutput')]"
+				"[concat(variables('factoryId'), '/datasets/supplieroutput')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks1')]"
 			]
 		},
 		{
@@ -1057,6 +1089,28 @@
 						"type": "SecureString",
 						"value": "[parameters('AzureDataLakeStorage_accountKey')]"
 					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricks1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-59719628671937.17.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDatabricks1_accessToken')]"
+					},
+					"newClusterNodeType": "Standard_DS3_v2",
+					"newClusterNumOfWorker": "1",
+					"newClusterVersion": "13.3.x-scala2.12",
+					"clusterOption": "Fixed",
+					"newClusterInitScripts": []
 				}
 			},
 			"dependsOn": []

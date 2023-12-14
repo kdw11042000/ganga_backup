@@ -13,6 +13,30 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/partsuppinput')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "HttpServer6",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/partsuppoutput')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -667,6 +691,33 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "nb1-cleaning",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "supplier",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/byalla-sreekanth_1701233001482@npgreatlearning.onmicrosoft.com/nb1-dataCleaning"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabricks1",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"policy": {
@@ -675,6 +726,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/partsuppinput')]",
 				"[concat(variables('factoryId'), '/datasets/partsuppoutput')]",
 				"[concat(variables('factoryId'), '/datasets/regioninput')]",
 				"[concat(variables('factoryId'), '/datasets/regionoutput')]",
