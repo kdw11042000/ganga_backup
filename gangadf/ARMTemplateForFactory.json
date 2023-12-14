@@ -11,13 +11,17 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage'"
 		},
-		"AzureDatabricks1_accessToken": {
+		"AzureDatabricks_accessToken": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks1'"
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks'"
 		},
 		"AzureDataLakeStorage_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://gangasa.dfs.core.windows.net/"
+		},
+		"AzureDatabricks_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "1214-070237-qq1312hp"
 		},
 		"HttpServer1_properties_typeProperties_url": {
 			"type": "string",
@@ -606,12 +610,12 @@
 							"notebookPath": "/Users/byalla-sreekanth_1701233001482@npgreatlearning.onmicrosoft.com/nb1-dataCleaning"
 						},
 						"linkedServiceName": {
-							"referenceName": "AzureDatabricks1",
+							"referenceName": "AzureDatabricks",
 							"type": "LinkedServiceReference"
 						}
 					},
 					{
-						"name": "nb2-transformation-vistualization",
+						"name": "nb2-transformation-visualiation",
 						"type": "DatabricksNotebook",
 						"dependsOn": [
 							{
@@ -633,7 +637,7 @@
 							"notebookPath": "/Users/byalla-sreekanth_1701233001482@npgreatlearning.onmicrosoft.com/nb2-dataTransformations"
 						},
 						"linkedServiceName": {
-							"referenceName": "AzureDatabricks1",
+							"referenceName": "AzureDatabricks",
 							"type": "LinkedServiceReference"
 						}
 					}
@@ -660,7 +664,7 @@
 				"[concat(variables('factoryId'), '/datasets/regionoutput')]",
 				"[concat(variables('factoryId'), '/datasets/supplierinput')]",
 				"[concat(variables('factoryId'), '/datasets/supplieroutput')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks1')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks')]"
 			]
 		},
 		{
@@ -1121,7 +1125,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureDatabricks1')]",
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricks')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1131,13 +1135,9 @@
 					"domain": "https://adb-59719628671937.17.azuredatabricks.net",
 					"accessToken": {
 						"type": "SecureString",
-						"value": "[parameters('AzureDatabricks1_accessToken')]"
+						"value": "[parameters('AzureDatabricks_accessToken')]"
 					},
-					"newClusterNodeType": "Standard_DS3_v2",
-					"newClusterNumOfWorker": "1",
-					"newClusterVersion": "13.3.x-scala2.12",
-					"clusterOption": "Fixed",
-					"newClusterInitScripts": []
+					"existingClusterId": "[parameters('AzureDatabricks_properties_typeProperties_existingClusterId')]"
 				}
 			},
 			"dependsOn": []

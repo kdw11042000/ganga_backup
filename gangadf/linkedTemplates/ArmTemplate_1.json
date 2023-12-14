@@ -715,12 +715,12 @@
 							"notebookPath": "/Users/byalla-sreekanth_1701233001482@npgreatlearning.onmicrosoft.com/nb1-dataCleaning"
 						},
 						"linkedServiceName": {
-							"referenceName": "AzureDatabricks1",
+							"referenceName": "AzureDatabricks",
 							"type": "LinkedServiceReference"
 						}
 					},
 					{
-						"name": "nb2-transformation-vistualization",
+						"name": "nb2-transformation-visualiation",
 						"type": "DatabricksNotebook",
 						"dependsOn": [
 							{
@@ -742,7 +742,7 @@
 							"notebookPath": "/Users/byalla-sreekanth_1701233001482@npgreatlearning.onmicrosoft.com/nb2-dataTransformations"
 						},
 						"linkedServiceName": {
-							"referenceName": "AzureDatabricks1",
+							"referenceName": "AzureDatabricks",
 							"type": "LinkedServiceReference"
 						}
 					}

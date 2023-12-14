@@ -8,11 +8,14 @@
 		"AzureDataLakeStorage_accountKey": {
 			"value": ""
 		},
-		"AzureDatabricks1_accessToken": {
+		"AzureDatabricks_accessToken": {
 			"value": ""
 		},
 		"AzureDataLakeStorage_properties_typeProperties_url": {
 			"value": "https://gangasa.dfs.core.windows.net/"
+		},
+		"AzureDatabricks_properties_typeProperties_existingClusterId": {
+			"value": "1214-070237-qq1312hp"
 		},
 		"HttpServer1_properties_typeProperties_url": {
 			"value": "https://raw.githubusercontent.com/kdw11042000/Ganga/main/customer.csv"
